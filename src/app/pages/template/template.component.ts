@@ -7,6 +7,11 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./template.component.css'],
 })
 export class TemplateComponent implements OnInit {
+  userData = {
+    name: '',
+    lastName: '',
+    email: '',
+  };
   constructor() {}
 
   ngOnInit(): void {}
