@@ -1,0 +1,36 @@
+<h4>Formularios <small> Templates </small></h4>
+<hr />
+<!-- the templateForm work like a reffence to send in the typescript file  & send ngForm inside-->
+<form autocomplete="off" (ngSubmit)="saveSubmit(templateForm)" #templateForm="ngForm">
+    <div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Name</label>
+            <div class="col-8">
+                <input class="form-control" name="name" type="text" ngModel placeholder="Nombre" required minlength="6" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">LastName</label>
+            <div class="col-8">
+                <input class="form-control" type="text" placeholder="Apellido" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-8">
+            <input class="form-control" type="email" placeholder="Correo electrónico" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
