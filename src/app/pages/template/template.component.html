@@ -30,8 +30,9 @@
       <input class="form-control" type="email" placeholder="email" [class.is-invalid]="email.invalid && email.touched"
         [ngModel]="userData.email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required
         #email="ngModel" />
-    </div> <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
-      check your data writed</small>
+      <small *ngIf="email.invalid && email.touched" class="form-text text-danger">
+        check your data writed</small>
+    </div>
   </div>
 
   <div class="form-group row">

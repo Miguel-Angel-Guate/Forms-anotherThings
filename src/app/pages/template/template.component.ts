@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CountryService } from 'src/app/services/country.service';
 
 @Component({
   selector: 'app-template',
@@ -12,11 +13,21 @@ export class TemplateComponent implements OnInit {
     lastName: '',
     email: '',
   };
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor(private countryService: CountryService) {}
+  ngOnInit(): void {
+    this.countryService.getContries().subscribe((countries) => {
+      console.log('countries.....', countries);
+    });
+  }
   saveSubmit(templateForm: NgForm) {
     console.log('Res', templateForm);
     console.log('the data i wrote', templateForm.value);
+    if (templateForm.invalid) {
+      Object.values(templateForm.controls).forEach((control) => {
+        control.markAsTouched();
+      });
+      return;
+    }
+    console.log('i waiting.....', templateForm.value);
   }
 }
