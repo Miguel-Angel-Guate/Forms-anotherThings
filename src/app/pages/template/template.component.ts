@@ -12,11 +12,17 @@ export class TemplateComponent implements OnInit {
     name: '',
     lastName: '',
     email: '',
+    country: '',
   };
+  country: any[] = [];
   constructor(private countryService: CountryService) {}
   ngOnInit(): void {
     this.countryService.getContries().subscribe((countries) => {
-      console.log('countries.....', countries);
+      this.country = countries;
+      this.country.unshift({
+        name: '[choose country]',
+        code: '',
+      });
     });
   }
   saveSubmit(templateForm: NgForm) {
