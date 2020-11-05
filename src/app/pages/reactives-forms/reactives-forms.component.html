@@ -3,42 +3,103 @@
 <form autocomplete="off" [formGroup]="reactiveForm" (ngSubmit)="saveSubmit()">
   <div>
     <div class="form-group row">
-      <label class="col-2 col-form-label">Nombre</label>
-      <div class="col-8">
+      <label class="col-2 col-form-label">Name</label>
+      <div class="col">
         <input class="form-control" type="text" placeholder="name" formControlName="name"
           [class.is-invalid]="nameNoValid" />
-        <small *ngIf="nameNoValid" class="text-danger"> min length 5 chracters</small>
+        <small *ngIf="nameNoValid" class="text-danger">
+          min length 5 chracters</small>
       </div>
     </div>
 
     <div class="form-group row">
-      <label class="col-2 col-form-label">Apellido</label>
-      <div class="col-8">
+      <label class="col-2 col-form-label">Last name</label>
+      <div class="col">
         <input class="form-control" type="text" placeholder="LastName" formControlName="lName"
-          [class.is-invalid]="lNameNoValid" /> <small *ngIf="lNameNoValid" class="text-danger"> min length 5
-          chracters</small>
+          [class.is-invalid]="lNameNoValid" />
+        <small *ngIf="lNameNoValid" class="text-danger">
+          min length 5 chracters</small>
       </div>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-2 col-form-label">Correo</label>
-    <div class="col-8">
+    <label class="col-2 col-form-label">email</label>
+    <div class="col">
       <input class="form-control" type="email" placeholder="email" formControlName="email"
-        [class.is-invalid]="emailNoValid" /> <small *ngIf="emailNoValid" class="text-danger"> some wrong</small>
+        [class.is-invalid]="emailNoValid" />
+      <small *ngIf="emailNoValid" class="text-danger"> some wrong</small>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">pass</label>
+    <div class="col">
+      <input class="form-control" type="password" placeholder="pass" formControlName="passOne"
+        [class.is-invalid]="passOneNo" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Validate pass</label>
+    <div class="col">
+      <input class="form-control" type="password" placeholder="validate pass" formControlName="passTwo"
+        [class.is-invalid]="passTwoNo" />
+    </div>
+  </div>
+
+  <div class="form-group row" formGroupName="adress">
+    <label class="col-2 col-form-label">adress</label>
+    <div class="form-row col">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Distrit" formControlName="distrit"
+          [class.is-invalid]="distritNoValid" />
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="city" formControlName="city"
+          [class.is-invalid]="cityNoValid" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Id</th>
+            <th>Skill</th>
+            <th>delete</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="skills">
+          <tr *ngFor="let skill of skills.controls; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <input class="form-control" type="text" [formControlName]="i" />
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteSkill(i)">
+                delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary btn-block mb-4" (click)="addSkills()">
+        +add
+      </button>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label"></label>
-    <div class="input-group col-md-8">
+    <div class="input-group col-md">
       <button type="submit" class="btn btn-outline-primary btn-block">
         Guardar
       </button>
     </div>
   </div>
 </form>
-<hr>
+
+<hr />
 <pre>state of the form: {{reactiveForm.valid}}
 
     <br>
@@ -46,5 +107,5 @@
 </pre>
 
 <pre>
-    {{reactiveForm.value | json}}
+    {{ reactiveForm.value | json }}
 </pre>
