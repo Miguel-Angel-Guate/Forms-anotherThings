@@ -41,6 +41,12 @@ export class ReactivesFormsComponent implements OnInit {
       this.reactiveForm.get('email').touched
     );
   }
+  userNoValid() {
+    return (
+      this.reactiveForm.get('user').invalid &&
+      this.reactiveForm.get('user').touched
+    );
+  }
   get distritNoValid() {
     return (
       this.reactiveForm.get('adress.distrit').invalid &&
@@ -68,25 +74,31 @@ export class ReactivesFormsComponent implements OnInit {
 
   //step3 create the formBuilder
   createForm() {
-    this.reactiveForm = this.formBuilder.group({
-      //in the array first go the valor, and then the validation(sincrono) and last valiation asyncrono
-      name: [' ', [Validators.required, Validators.minLength(5)]],
-      lName: ['', [Validators.required, this.validate.noThisName]],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+    this.reactiveForm = this.formBuilder.group(
+      {
+        //in the array first go the valor, and then the validation(sincrono) and last valiation asyncrono
+        name: [' ', [Validators.required, Validators.minLength(5)]],
+        lName: ['', [Validators.required, this.validate.noThisName]],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+          ],
         ],
-      ],
-      passOne: ['', Validators.required],
-      passTwo: ['', Validators.required],
-      adress: this.formBuilder.group({
-        distrit: ['', Validators.required],
-        city: ['', Validators.required],
-      }),
-      skills: this.formBuilder.array([]),
-    });
+        user: ['', , this.validate.userExist],
+        passOne: ['', Validators.required],
+        passTwo: ['', Validators.required],
+        adress: this.formBuilder.group({
+          distrit: ['', Validators.required],
+          city: ['', Validators.required],
+        }),
+        skills: this.formBuilder.array([]),
+      },
+      {
+        validators: this.validate.theSamePass('passOne', 'passTwo'),
+      }
+    );
   }
   addSkills() {
     this.skills.push(this.formBuilder.control('', Validators.required));
@@ -96,9 +108,11 @@ export class ReactivesFormsComponent implements OnInit {
   }
   chargeDataForm() {
     this.reactiveForm.reset({
-      name: 'jhon',
-      lName: '',
-      email: '',
+      name: 'jhonsss',
+      lName: 'ssssssssss',
+      email: 'dkdakldld@yahoo.sd',
+      passOne: '123',
+      passTwo: '123',
       adress: {
         distrit: 'el cartucho',
         city: '',

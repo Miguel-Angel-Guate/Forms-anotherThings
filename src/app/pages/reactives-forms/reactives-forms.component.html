@@ -31,6 +31,16 @@
       <small *ngIf="emailNoValid" class="text-danger"> some wrong</small>
     </div>
   </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">user</label>
+    <div class="col">
+      <input class="form-control" type="email" placeholder="user" formControlName="user"
+        [class.is-invalid]="userNoValid" />
+      <small *ngIf="userNoValid" class="text-danger"> this user not evailable</small>
+    </div>
+  </div>
+
   <div class="form-group row">
     <label class="col-2 col-form-label">pass</label>
     <div class="col">
